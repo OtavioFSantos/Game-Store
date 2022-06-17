@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Jogo {
+  id           String    @id @default(uuid())
+  nome         String
+  genero       String?
+  precoUnidade Float
+  fornecido    Fornece[]
+  vendidoEm    Possui[]
+  reviews      Review[]
+  comprado     Compra[]
+}
+
+model Fornecedor {
+  id      String    @id @default(uuid())
+  nome    String
+  fornece Fornece[]
+}
+
+model Fornece {
+  forneceId String
+  fornece   Fornecedor @relation(fields: [forneceId], references: [id])
+  jogoId    String
+  jogo      Jogo       @relation(fields: [jogoId], references: [id])
+
+  @@id([forneceId, jogoId])
+}
+
+model Loja {
+  id           String        @id @default(uuid())
+  nome         String
+  email        String?
+  telefone     Int?
+  coordenadas  Int
+  listaJogos   Possui[]
+  funcionarios Funcionario[]
+  cidadeId     String?
+  cidade       Cidade?       @relation(fields: [cidadeId], references: [id])
+}
+
+model Cidade {
+  id     String  @id @default(uuid())
+  nome   String
+  estado String?
+  lojas  Loja[]
+}
+
+model Possui {
+  lojaId String
+  loja   Loja   @relation(fields: [lojaId], references: [id])
+  jogoId String
+  jogo   Jogo   @relation(fields: [jogoId], references: [id])
+
+  @@id([lojaId, jogoId])
+}
+
+model Funcionario {
+  id         String     @id @default(uuid())
+  nome       String
+  salario    Float
+  telefone   Int?
+  lojaId     String
+  trabalhaEm Loja       @relation(fields: [lojaId], references: [id])
+  gerente    Gerente?
+  atendente  Atendente?
+}
+
+model Gerente {
+  funcionarioId String      @id
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+  turno         String
+}
+
+model Atendente {
+  funcionarioId String      @id
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+  dataInicio    DateTime
+  dataFim       DateTime
+}
+
+model Review {
+  id       String    @id @default(uuid())
+  nota     Float
+  jogoId   String
+  jogo     Jogo      @relation(fields: [jogoId], references: [id])
+  feitaPor Escrita[]
+}
+
+model Cliente {
+  id       String   @id @default(uuid())
+  nome     String
+  telefone Int
+  email    String
+  realiza  Compra[]
+  critico  Critico?
+}
+
+model Critico {
+  clienteId      String    @id
+  cliente        Cliente   @relation(fields: [clienteId], references: [id])
+  notaIndividual Float
+  fazCritica     Escrita[]
+}
+
+model Escrita {
+  criticoId String
+  critico   Critico @relation(fields: [criticoId], references: [clienteId])
+  reviewId  String
+  review    Review  @relation(fields: [reviewId], references: [id])
+
+  @@id([criticoId, reviewId])
+}
+
+model Compra {
+  preco      Float
+  quantidade Int
+  data       DateTime
+  clienteId  String
+  cliente    Cliente  @relation(fields: [clienteId], references: [id])
+  jogoId     String
+  jogo       Jogo     @relation(fields: [jogoId], references: [id])
+
+  @@id([clienteId, jogoId])
+}
