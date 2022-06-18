@@ -12,4 +12,15 @@ export class ClienteService {
       },
     });
   }
+
+  async list() {
+    return this.db.cliente.findMany({
+      select: {
+        id: true,
+        nome: true,
+        telefone: true,
+        email: true,
+      },
+    });
+  }
 }
