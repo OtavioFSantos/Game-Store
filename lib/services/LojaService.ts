@@ -18,4 +18,16 @@ export class LojaService {
       },
     });
   }
+
+  async list() {
+    return this.db.loja.findMany({
+      select: {
+        id: true,
+        nome: true,
+        telefone: true,
+        email: true,
+        coordenadas: true,
+      },
+    });
+  }
 }
