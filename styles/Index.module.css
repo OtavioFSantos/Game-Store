@@ -72,3 +72,32 @@
   font-size: 1.5rem;
 }
 
+.clientes {
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 200px;
+  background-color: #243447;
+}
+
+.lojas {
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  min-width: 200px;
+  padding: 16px;
+  background-color: #243447;
+}
+
+.sidebyside {
+  display: flex;
+  flex-direction: row;
+}
