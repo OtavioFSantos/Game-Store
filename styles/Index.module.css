@@ -1,0 +1,74 @@
+.container {
+  padding: 0 2rem;
+}
+
+.textarea {
+  margin: 5px;
+  -webkit-appearance: none;
+  resize: none;
+  border: none;
+  padding: 6px;
+  outline: none;
+  color: #f5f8fa;
+  border-radius: 4px;
+  font-family: system-ui;
+  background-color: #243447;
+}
+
+.textarea::placeholder {
+  color: #aab8c2;
+}
+
+.button {
+  display: flex;
+  left: 12px;
+  padding: 6px;
+  bottom: 12px;
+  margin-left: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #f5f8fa;
+  border-radius: 4px;
+  font-family: system-ui;
+  background-color: #1da1f2;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.main {
+  padding: 3rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title a {
+  color: #1da1f2;
+  text-decoration: none;
+}
+
+.title {
+  margin: 10;
+  line-height: 1.15;
+  font-size: 3rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  margin-top: 10;
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
