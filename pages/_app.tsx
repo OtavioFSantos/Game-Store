@@ -1,7 +1,17 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const queryClient = new QueryClient();
+
+export default function App({ Component, pageProps }) {
+  return (
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </SessionProvider>
+  );
 }
-
-export default MyApp
