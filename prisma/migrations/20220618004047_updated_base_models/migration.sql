@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Loja" ALTER COLUMN "telefone" SET DATA TYPE TEXT,
+ALTER COLUMN "coordenadas" SET DATA TYPE TEXT;

@@ -1,9 +1,11 @@
 version: "3"
+
 services:
   postgres:
     image: postgres:13-alpine
-    container_name: pdb_db
+    container_name: pbd_db
     environment:
+      POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
     ports:
-      - "8080:8080"
+      - "5432:5432"
